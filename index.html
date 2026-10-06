@@ -1,186 +1,228 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <title>IAMLIGHTKZ — магазин освещения</title>
-  <meta name="theme-color" content="#101010">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>IAMLIGHTKZ — магазин освещения</title>
 
-  <style>
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      background:#101010;
-      color:#f6f2e9;
-      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif
-    }
-    header{
-      padding:24px 18px;
-      background:linear-gradient(140deg,#252019,#101010);
-      border-bottom:1px solid #493b24
-    }
-    .brand{
-      font-weight:900;
-      letter-spacing:2px;
-      font-size:27px
-    }
-    .brand span{color:#d7b474}
-    .tag{
-      color:#c8bda8;
-      font-size:13px;
-      margin-top:7px
-    }
-    .wrap{
-      max-width:850px;
-      margin:auto;
-      padding:20px 16px 110px
-    }
-    h1{font-size:28px;margin:8px 0}
-    h2{font-size:20px;margin:28px 0 12px}
-    .intro{color:#c5beb2;line-height:1.5}
-    .chips{
-      display:flex;
-      gap:8px;
-      overflow:auto;
-      padding:10px 0 18px
-    }
-    .chip{
-      white-space:nowrap;
-      background:#242424;
-      color:#eee;
-      border:1px solid #484039;
-      border-radius:22px;
-      padding:11px 14px
-    }
-    .chip.active{
-      background:#cba869;
-      color:#111;
-      border-color:#cba869
-    }
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:12px
-    }
-    .item{
-      background:#1c1c1c;
-      border:1px solid #3b342a;
-      border-radius:15px;
-      padding:13px;
-      display:flex;
-      flex-direction:column;
-      gap:10px
-    }
-    .visual{
-      height:100px;
-      border-radius:10px;
-      background:radial-gradient(circle at 50% 20%,#53432a,#222 65%);
-      display:grid;
-      place-items:center;
-      font-size:38px
-    }
-    .name{
-      font-weight:700;
-      line-height:1.35;
-      min-height:38px
-    }
-    .note{
-      font-size:12px;
-      color:#b9afa0;
-      min-height:30px
-    }
-    .price{
-      color:#e8c58b;
-      font-weight:800
-    }
-    .add,.primary{
-      background:#d4ae70;
-      border:0;
-      border-radius:10px;
-      padding:12px;
-      font-weight:800;
-      color:#15110b
-    }
-    .add{margin-top:auto}
-    .bar{
-      position:fixed;
-      bottom:0;
-      left:0;
-      right:0;
-      padding:12px 16px calc(12px + env(safe-area-inset-bottom));
-      background:#191919;
-      border-top:1px solid #55442e;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px
-    }
-    .bar button{min-width:155px}
-    .muted{
-      color:#b8aa96;
-      font-size:13px
-    }
-    dialog{
-      background:#1a1a1a;
-      color:#f6f2e9;
-      border:1px solid #79603b;
-      border-radius:18px;
-      width:min(94vw,500px);
-      max-height:85vh;
-      padding:20px
-    }
-    dialog::backdrop{background:#000b}
-    .line{
-      display:flex;
-      justify-content:space-between;
-      gap:8px;
-      padding:10px 0;
-      border-bottom:1px solid #333
-    }
-    .qty button{
-      background:#363029;
-      border:0;
-      color:white;
-      padding:5px 10px;
-      border-radius:7px
-    }
-    .field{
-      display:block;
-      width:100%;
-      padding:12px;
-      margin:10px 0;
-      background:#292929;
-      color:white;
-      border:1px solid #5d503d;
-      border-radius:9px;
-      font:inherit
-    }
-    .actions{
-      display:flex;
-      gap:10px;
-      margin-top:15px
-    }
-    .actions button{
-      flex:1;
-      padding:12px;
-      border-radius:9px
-    }
-    .secondary{
-      background:#333;
-      color:white;
-      border:0
-    }
-    .footer{
-      margin:30px 0;
-      color:#b5a995;
-      font-size:13px;
-      line-height:1.6
-    }
-    @media(min-width:650px){
-      .grid{grid-template-columns:repeat(3,1fr)}
-      .visual{height:150px}
-    }
-  </style>
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:#101010;
+  color:#f6f2e9;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif
+}
+
+header{
+  padding:24px 18px;
+  background:linear-gradient(140deg,#252019,#101010);
+  border-bottom:1px solid #493b24
+}
+
+.brand{
+  font-size:28px;
+  font-weight:900;
+  letter-spacing:2px
+}
+
+.brand span{color:#d7b474}
+
+.tag{
+  margin-top:7px;
+  color:#c8bda8
+}
+
+.wrap{
+  max-width:900px;
+  margin:auto;
+  padding:20px 15px 120px
+}
+
+h1{
+  font-size:28px;
+  margin:10px 0
+}
+
+.intro{
+  line-height:1.5;
+  color:#c5beb2
+}
+
+.chips{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding:12px 0 20px
+}
+
+.chip{
+  border:1px solid #484039;
+  background:#242424;
+  color:white;
+  padding:10px 14px;
+  border-radius:25px;
+  white-space:nowrap
+}
+
+.chip.active{
+  background:#d4ae70;
+  color:#111
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px
+}
+
+.item{
+  background:#1c1c1c;
+  border:1px solid #3b342a;
+  border-radius:15px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column
+}
+
+.photo{
+  width:100%;
+  height:190px;
+  object-fit:cover;
+  display:block;
+  background:#222
+}
+
+.info{
+  padding:12px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  flex:1
+}
+
+.name{
+  font-weight:800;
+  line-height:1.3
+}
+
+.desc{
+  font-size:13px;
+  color:#b9afa0
+}
+
+.price{
+  color:#e8c58b;
+  font-weight:900
+}
+
+.add{
+  margin-top:auto;
+  border:0;
+  border-radius:10px;
+  padding:12px;
+  background:#d4ae70;
+  color:#15110b;
+  font-weight:900
+}
+
+.bar{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:20;
+  background:#191919;
+  border-top:1px solid #55442e;
+  padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+  display:flex;
+  align-items:center;
+  justify-content:space-between
+}
+
+.primary{
+  background:#d4ae70;
+  color:#15110b;
+  border:0;
+  border-radius:10px;
+  padding:13px 18px;
+  font-weight:900
+}
+
+.muted{
+  color:#b8aa96;
+  font-size:13px
+}
+
+dialog{
+  width:min(94vw,500px);
+  background:#1a1a1a;
+  color:white;
+  border:1px solid #79603b;
+  border-radius:18px;
+  padding:20px
+}
+
+dialog::backdrop{
+  background:#000b
+}
+
+.line{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  padding:10px 0;
+  border-bottom:1px solid #333
+}
+
+.qty button{
+  border:0;
+  background:#39332b;
+  color:white;
+  border-radius:7px;
+  padding:6px 10px
+}
+
+.field{
+  width:100%;
+  padding:12px;
+  margin:8px 0;
+  border-radius:9px;
+  border:1px solid #5d503d;
+  background:#292929;
+  color:white;
+  font-size:16px
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  margin-top:12px
+}
+
+.actions button{
+  flex:1
+}
+
+.secondary{
+  border:0;
+  background:#333;
+  color:white;
+  border-radius:10px
+}
+
+.footer{
+  margin-top:30px;
+  color:#b5a995;
+  line-height:1.6
+}
+
+@media(min-width:700px){
+  .grid{grid-template-columns:repeat(3,1fr)}
+  .photo{height:250px}
+}
+</style>
 </head>
 
 <body>
@@ -193,24 +235,26 @@
 </header>
 
 <main class="wrap">
-  <h1>Освещение с характером</h1>
 
-  <p class="intro">
-    Магнитные системы, светильники, блоки питания, розетки и выключатели.
-    Более 40 брендов и 100 цветовых решений в ассортименте.
-  </p>
+<h1>Освещение с характером</h1>
 
-  <div id="filters" class="chips"></div>
+<p class="intro">
+Магнитные трековые системы 48V, светильники, блоки питания,
+розетки и выключатели.
+</p>
 
-  <h2>Каталог</h2>
-  <div class="grid" id="products"></div>
+<div id="filters" class="chips"></div>
 
-  <p class="footer">
-    📍 Астана, Expostroy, бутик 326<br>
-    📦 Доставка по Казахстану и России<br>
-    Цены в каталоге ориентировочные — подтверждаются при оформлении заказа.
-    Оплата согласовывается с менеджером.
-  </p>
+<h2>Каталог</h2>
+
+<div id="products" class="grid"></div>
+
+<div class="footer">
+📍 Астана, Expostroy, бутик 326<br>
+📦 Доставка по Казахстану и России<br>
+Цены подтверждаются при оформлении заказа.
+</div>
+
 </main>
 
 <div class="bar">
@@ -224,399 +268,366 @@
   </button>
 </div>
 
-<dialog id="cartDialog">
-  <h2>Ваш заказ</h2>
+<dialog id="cart">
 
-  <div id="cartLines"></div>
+<h2>Ваш заказ</h2>
 
-  <strong id="cartTotal"></strong>
+<div id="cartLines"></div>
 
-  <input
-    class="field"
-    id="customer"
-    placeholder="Ваше имя"
-    maxlength="80"
-  >
+<p><strong id="cartTotal"></strong></p>
 
-  <input
-    class="field"
-    id="phone"
-    placeholder="Телефон для связи"
-    maxlength="40"
-  >
+<input id="name" class="field" placeholder="Ваше имя">
 
-  <input
-    class="field"
-    id="city"
-    placeholder="Город доставки"
-    maxlength="100"
-  >
+<input id="phone" class="field" placeholder="Телефон">
 
-  <div class="actions">
-    <button
-      class="secondary"
-      onclick="document.getElementById('cartDialog').close()"
-    >
-      Назад
-    </button>
+<input id="city" class="field" placeholder="Город">
 
-    <button
-      class="primary"
-      id="orderButton"
-      onclick="order()"
-    >
-      Оформить
-    </button>
-  </div>
+<div class="actions">
 
-  <p class="muted">
-    После отправки заявки мы свяжемся с вами для подтверждения наличия,
-    итоговой стоимости и доставки.
-  </p>
+<button class="secondary"
+onclick="document.getElementById('cart').close()">
+Назад
+</button>
+
+<button class="primary" id="sendButton" onclick="sendOrder()">
+Оформить
+</button>
+
+</div>
+
 </dialog>
 
 <script>
 
-const WORKER_URL =
-  'https://iamlightkz-orders.islam0100tj.workers.dev/order';
+const WORKER =
+"https://iamlightkz-orders.islam0100tj.workers.dev/order";
 
-const products = [
-  {
-    id:1,
-    n:'Магнитный трек 48V · 2 м',
-    d:'Скрытый монтаж, чёрный',
-    p:17999,
-    c:'Треки',
-    e:'〰️'
-  },
-  {
-    id:2,
-    n:'Магнитный трек 48V · 3 м',
-    d:'Скрытый монтаж, чёрный',
-    p:20250,
-    c:'Треки',
-    e:'〰️'
-  },
-  {
-    id:3,
-    n:'Линейный светильник · 60 см',
-    d:'48V, 24 Вт',
-    p:null,
-    c:'Светильники',
-    e:'💡'
-  },
-  {
-    id:4,
-    n:'Линейный светильник · 30 см',
-    d:'48V, 12 Вт',
-    p:null,
-    c:'Светильники',
-    e:'💡'
-  },
-  {
-    id:5,
-    n:'Блок питания · 200 Вт',
-    d:'48V',
-    p:null,
-    c:'Блоки питания',
-    e:'🔌'
-  },
-  {
-    id:6,
-    n:'Блок питания · 300 Вт',
-    d:'48V',
-    p:null,
-    c:'Блоки питания',
-    e:'🔌'
-  },
-  {
-    id:7,
-    n:'Премиальные розетки',
-    d:'Более 40 брендов и 100 цветовых решений',
-    p:null,
-    c:'Розетки и выключатели',
-    e:'◻️'
-  },
-  {
-    id:8,
-    n:'Премиальные выключатели',
-    d:'Разные серии, материалы и цвета',
-    p:null,
-    c:'Розетки и выключатели',
-    e:'◻️'
-  },
-  {
-    id:9,
-    n:'Готовые комплекты 48V',
-    d:'Подбор под ваш проект',
-    p:null,
-    c:'Комплекты',
-    e:'✨'
-  }
+const GH =
+"https://raw.githubusercontent.com/iamlightkz/iamlightkz.github.io/main/";
+
+const products=[
+
+{
+id:1,
+name:"Магнитный трек 48V · 2 м",
+desc:"Скрытый монтаж · чёрный · 48V",
+price:17999,
+cat:"Треки",
+img:GH+"IMG_6044.jpeg"
+},
+
+{
+id:2,
+name:"Магнитный трек 48V · 3 м",
+desc:"Скрытый монтаж · чёрный · 48V",
+price:20250,
+cat:"Треки",
+img:GH+"IMG_6045.jpeg"
+},
+
+{
+id:3,
+name:"Линейный светильник · 60 см",
+desc:"48V · 24 Вт · 4000K",
+price:null,
+cat:"Светильники",
+img:GH+"98629223-E29D-4211-9D3F-30BD20257386.jpeg"
+},
+
+{
+id:4,
+name:"Линейный светильник · 30 см",
+desc:"48V · 12 Вт · 4000K",
+price:null,
+cat:"Светильники",
+img:GH+"1FA95B0B-A725-45AE-A7DC-335E9A9B1E4D(1).jpeg"
+},
+
+{
+id:5,
+name:"Блок питания 48V · 200W",
+desc:"Для магнитных трековых систем",
+price:null,
+cat:"Блоки питания",
+img:GH+"IMG_6048.png"
+},
+
+{
+id:6,
+name:"Блок питания 48V · 300W",
+desc:"Для магнитных трековых систем",
+price:null,
+cat:"Блоки питания",
+img:GH+"IMG_6048.png"
+},
+
+{
+id:7,
+name:"Готовые комплекты 48V",
+desc:"Подбор комплекта под ваш проект",
+price:null,
+cat:"Комплекты",
+img:GH+"IMG_6047.jpeg"
+},
+
+{
+id:8,
+name:"Комплектация магнитного трека",
+desc:"Трек + заглушки",
+price:null,
+cat:"Комплекты",
+img:GH+"IMG_6046.png"
+}
+
 ];
 
-let filter = 'Все';
-let basket = {};
+let category="Все";
+let basket={};
 
-const fmt = value =>
-  value == null
-    ? 'Цена по запросу'
-    : value.toLocaleString('ru-RU') + ' ₸';
+function money(v){
+  return v==null
+    ?"Цена по запросу"
+    :v.toLocaleString("ru-RU")+" ₸";
+}
 
-const esc = value =>
-  String(value).replace(
-    /[&<>"']/g,
-    ch => ({
-      '&':'&amp;',
-      '<':'&lt;',
-      '>':'&gt;',
-      '"':'&quot;',
-      "'":'&#39;'
-    }[ch])
-  );
+function render(){
 
-function render() {
-  const categories = [
-    'Все',
-    ...new Set(products.map(product => product.c))
+  const categories=[
+    "Все",
+    ...new Set(products.map(p=>p.cat))
   ];
 
-  document.getElementById('filters').innerHTML =
-    categories.map(category => `
+  document.getElementById("filters").innerHTML=
+    categories.map(c=>`
       <button
-        class="chip ${category === filter ? 'active' : ''}"
-        data-filter="${esc(category)}"
+        class="chip ${c===category?"active":""}"
+        onclick="setCategory('${c}')"
       >
-        ${esc(category)}
+        ${c}
       </button>
-    `).join('');
+    `).join("");
 
-  document
-    .querySelectorAll('[data-filter]')
-    .forEach(button => {
-      button.onclick = () => {
-        filter = button.dataset.filter;
-        render();
-      };
-    });
-
-  document.getElementById('products').innerHTML =
+  document.getElementById("products").innerHTML=
     products
-      .filter(product =>
-        filter === 'Все' || product.c === filter
-      )
-      .map(product => `
-        <article class="item">
-          <div class="visual">${product.e}</div>
-          <div class="name">${esc(product.n)}</div>
-          <div class="note">${esc(product.d)}</div>
-          <div class="price">${fmt(product.p)}</div>
+    .filter(p=>category==="Все"||p.cat===category)
+    .map(p=>`
+
+      <div class="item">
+
+        <img
+          class="photo"
+          src="${p.img}"
+          alt="${p.name}"
+        >
+
+        <div class="info">
+
+          <div class="name">
+            ${p.name}
+          </div>
+
+          <div class="desc">
+            ${p.desc}
+          </div>
+
+          <div class="price">
+            ${money(p.price)}
+          </div>
 
           <button
             class="add"
-            data-id="${product.id}"
+            onclick="add(${p.id})"
           >
             + В корзину
           </button>
-        </article>
-      `)
-      .join('');
 
-  document
-    .querySelectorAll('[data-id]')
-    .forEach(button => {
-      button.onclick = () => {
-        const id = Number(button.dataset.id);
+        </div>
 
-        basket[id] =
-          (basket[id] || 0) + 1;
+      </div>
 
-        update();
-      };
-    });
+    `).join("");
 
   update();
 }
 
-function update() {
-  const items =
-    Object.entries(basket)
-      .filter(([, quantity]) => quantity > 0);
-
-  const sum =
-    items.reduce((total, [id, quantity]) => {
-      const product =
-        products.find(product => product.id == id);
-
-      return total +
-        (product.p || 0) * quantity;
-    }, 0);
-
-  const hasRequestPrice =
-    items.some(([id]) =>
-      products.find(product => product.id == id).p == null
-    );
-
-  document.getElementById('total').textContent =
-    fmt(sum) +
-    (hasRequestPrice ? ' + по запросу' : '');
-
-  const count =
-    items.reduce(
-      (total, [, quantity]) =>
-        total + quantity,
-      0
-    );
-
-  document.getElementById('count').textContent =
-    `В корзине ${count} товаров`;
-
-  document.getElementById('cartLines').innerHTML =
-    items.length
-      ? items.map(([id, quantity]) => {
-          const product =
-            products.find(product => product.id == id);
-
-          return `
-            <div class="line">
-              <div>
-                ${esc(product.n)}
-                <div class="muted">
-                  ${fmt(product.p)}
-                </div>
-              </div>
-
-              <div class="qty">
-                <button
-                  data-change="${id}"
-                  data-delta="-1"
-                >
-                  −
-                </button>
-
-                ${quantity}
-
-                <button
-                  data-change="${id}"
-                  data-delta="1"
-                >
-                  +
-                </button>
-              </div>
-            </div>
-          `;
-        }).join('')
-      : 'Корзина пуста';
-
-  document
-    .querySelectorAll('[data-change]')
-    .forEach(button => {
-      button.onclick = () => {
-        const id =
-          Number(button.dataset.change);
-
-        basket[id] =
-          Math.max(
-            0,
-            (basket[id] || 0) +
-            Number(button.dataset.delta)
-          );
-
-        update();
-      };
-    });
-
-  document.getElementById('cartTotal').textContent =
-    'Предварительная сумма: ' +
-    fmt(sum) +
-    (hasRequestPrice ? ' + позиции по запросу' : '');
+function setCategory(c){
+  category=c;
+  render();
 }
 
-function showCart() {
+function add(id){
+  basket[id]=(basket[id]||0)+1;
   update();
-  document
-    .getElementById('cartDialog')
-    .showModal();
 }
 
-async function order() {
-  const entries =
+function update(){
+
+  const entries=
     Object.entries(basket)
-      .filter(([, quantity]) => quantity > 0);
+    .filter(([,q])=>q>0);
 
-  if (!entries.length) {
-    alert('Добавьте товар в корзину');
+  let sum=0;
+  let count=0;
+  let requestPrice=false;
+
+  entries.forEach(([id,q])=>{
+
+    const p=
+      products.find(x=>x.id==id);
+
+    count+=q;
+
+    if(p.price==null){
+      requestPrice=true;
+    }else{
+      sum+=p.price*q;
+    }
+
+  });
+
+  document.getElementById("total").textContent=
+    sum.toLocaleString("ru-RU")+" ₸"+
+    (requestPrice?" + по запросу":"");
+
+  document.getElementById("count").textContent=
+    "В корзине "+count+" товаров";
+
+  document.getElementById("cartLines").innerHTML=
+    entries.length
+    ?entries.map(([id,q])=>{
+
+      const p=
+        products.find(x=>x.id==id);
+
+      return`
+
+      <div class="line">
+
+        <div>
+          ${p.name}
+          <div class="muted">
+            ${money(p.price)}
+          </div>
+        </div>
+
+        <div class="qty">
+
+          <button onclick="change(${id},-1)">
+          −
+          </button>
+
+          ${q}
+
+          <button onclick="change(${id},1)">
+          +
+          </button>
+
+        </div>
+
+      </div>
+
+      `;
+
+    }).join("")
+    :"Корзина пуста";
+
+  document.getElementById("cartTotal").textContent=
+    "Итого: "+
+    sum.toLocaleString("ru-RU")+" ₸"+
+    (requestPrice?" + позиции по запросу":"");
+}
+
+function change(id,n){
+  basket[id]=Math.max(
+    0,
+    (basket[id]||0)+n
+  );
+
+  update();
+}
+
+function showCart(){
+  update();
+  document.getElementById("cart").showModal();
+}
+
+async function sendOrder(){
+
+  const entries=
+    Object.entries(basket)
+    .filter(([,q])=>q>0);
+
+  if(!entries.length){
+    alert("Добавьте товар в корзину");
     return;
   }
 
-  const name =
-    document
-      .getElementById('customer')
-      .value
-      .trim();
+  const name=
+    document.getElementById("name")
+    .value.trim();
 
-  const phone =
-    document
-      .getElementById('phone')
-      .value
-      .trim();
+  const phone=
+    document.getElementById("phone")
+    .value.trim();
 
-  const city =
-    document
-      .getElementById('city')
-      .value
-      .trim();
+  const city=
+    document.getElementById("city")
+    .value.trim();
 
-  if (!name || !phone || !city) {
-    alert('Заполните имя, телефон и город');
+  if(!name||!phone||!city){
+    alert("Заполните имя, телефон и город");
     return;
   }
 
-  const items =
-    entries.map(([id, quantity]) => {
-      const product =
-        products.find(product => product.id == id);
+  let sum=0;
+  let request=false;
 
-      return `${product.n} — ${quantity} шт. (${fmt(product.p)})`;
-    }).join('\n');
+  const items=
+    entries.map(([id,q])=>{
 
-  const sum =
-    entries.reduce((total, [id, quantity]) => {
-      const product =
-        products.find(product => product.id == id);
+      const p=
+        products.find(x=>x.id==id);
 
-      return total +
-        (product.p || 0) * quantity;
-    }, 0);
+      if(p.price==null){
+        request=true;
+      }else{
+        sum+=p.price*q;
+      }
 
-  const hasRequestPrice =
-    entries.some(([id]) =>
-      products.find(product => product.id == id).p == null
-    );
+      return
+      p.name+
+      " — "+
+      q+
+      " шт. ("+
+      money(p.price)+
+      ")";
 
-  const total =
-    fmt(sum) +
-    (hasRequestPrice
-      ? ' + позиции по запросу'
-      : '');
+    }).join("\n");
 
-  const button =
-    document.getElementById('orderButton');
+  const total=
+    sum.toLocaleString("ru-RU")+
+    " ₸"+
+    (request
+      ?" + позиции по запросу"
+      :"");
 
-  const oldText = button.textContent;
+  const button=
+    document.getElementById("sendButton");
 
-  button.disabled = true;
-  button.textContent = 'Отправляем...';
+  button.disabled=true;
+  button.textContent="Отправляем...";
 
-  try {
-    const response =
+  try{
+
+    const response=
       await fetch(
-        WORKER_URL,
+        WORKER,
         {
-          method:'POST',
+          method:"POST",
 
           headers:{
-            'Content-Type':'application/json'
+            "Content-Type":
+            "application/json"
           },
 
           body:JSON.stringify({
@@ -629,43 +640,35 @@ async function order() {
         }
       );
 
-    const result =
+    const result=
       await response.json();
 
-    if (!response.ok || !result.ok) {
-      throw new Error(
-        result.error ||
-        'Ошибка отправки заказа'
-      );
+    if(!result.ok){
+      throw new Error();
     }
 
-    document
-      .getElementById('cartDialog')
-      .close();
-
     alert(
-      '✅ Заказ отправлен! Мы свяжемся с вами для подтверждения.'
+      "✅ Заказ отправлен!"
     );
 
-    basket = {};
+    basket={};
 
-    document.getElementById('customer').value = '';
-    document.getElementById('phone').value = '';
-    document.getElementById('city').value = '';
+    document
+      .getElementById("cart")
+      .close();
 
     update();
 
-  } catch (error) {
+  }catch(e){
+
     alert(
-      'Не удалось отправить заказ. Попробуйте ещё раз.'
+      "Ошибка отправки заказа"
     );
 
-    console.error(error);
-
-  } finally {
-    button.disabled = false;
-    button.textContent = oldText;
   }
+
+  button.disabled=false;
+  button.textContent="Оформить";
 }
 
 render();
