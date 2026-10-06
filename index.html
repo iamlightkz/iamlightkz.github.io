@@ -1,16 +1,676 @@
-<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>IAMLIGHTKZ — магазин освещения</title><meta name="theme-color" content="#101010"><style>*{box-sizing:border-box}body{margin:0;background:#101010;color:#f6f2e9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}header{padding:24px 18px;background:linear-gradient(140deg,#252019,#101010);border-bottom:1px solid #493b24}.brand{font-weight:900;letter-spacing:2px;font-size:27px}.brand span{color:#d7b474}.tag{color:#c8bda8;font-size:13px;margin-top:7px}.wrap{max-width:850px;margin:auto;padding:20px 16px 110px}h1{font-size:28px;margin:8px 0}h2{font-size:20px;margin:28px 0 12px}.intro{color:#c5beb2;line-height:1.5}.chips{display:flex;gap:8px;overflow:auto;padding:10px 0 18px}.chip{white-space:nowrap;background:#242424;color:#eee;border:1px solid #484039;border-radius:22px;padding:11px 14px}.chip.active{background:#cba869;color:#111;border-color:#cba869}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.item{background:#1c1c1c;border:1px solid #3b342a;border-radius:15px;padding:13px;display:flex;flex-direction:column;gap:10px}.visual{height:100px;border-radius:10px;background:radial-gradient(circle at 50% 20%,#53432a,#222 65%);display:grid;place-items:center;font-size:38px}.name{font-weight:700;line-height:1.35;min-height:38px}.note{font-size:12px;color:#b9afa0;min-height:30px}.price{color:#e8c58b;font-weight:800}.add,.primary{background:#d4ae70;border:0;border-radius:10px;padding:12px;font-weight:800;color:#15110b}.add{margin-top:auto}.bar{position:fixed;bottom:0;left:0;right:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:#191919;border-top:1px solid #55442e;display:flex;align-items:center;justify-content:space-between;gap:12px}.bar button{min-width:155px}.muted{color:#b8aa96;font-size:13px}dialog{background:#1a1a1a;color:#f6f2e9;border:1px solid #79603b;border-radius:18px;width:min(94vw,500px);max-height:85vh;padding:20px}dialog::backdrop{background:#000b}.line{display:flex;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid #333}.qty button{background:#363029;border:0;color:white;padding:5px 10px;border-radius:7px}.field{display:block;width:100%;padding:12px;margin:10px 0;background:#292929;color:white;border:1px solid #5d503d;border-radius:9px;font:inherit}.actions{display:flex;gap:10px;margin-top:15px}.actions button{flex:1;padding:12px;border-radius:9px}.secondary{background:#333;color:white;border:0}.footer{margin:30px 0;color:#b5a995;font-size:13px;line-height:1.6}@media(min-width:650px){.grid{grid-template-columns:repeat(3,1fr)}.visual{height:150px}}</style></head><body><header><div class="brand">IAM<span>LIGHTKZ</span></div><div class="tag">Магнитные треки 48V · светильники · премиальная электрика</div></header><main class="wrap"><h1>Освещение с характером</h1><p class="intro">Магнитные системы, светильники, блоки питания, розетки и выключатели. Более 40 брендов и 100 цветовых решений в ассортименте.</p><div id="filters" class="chips"></div><h2>Каталог</h2><div class="grid" id="products"></div><p class="footer">📍 Астана, Expostroy, бутик 326<br>📦 Доставка по Казахстану и России<br>Цены в каталоге ориентировочные — подтверждаются при оформлении заказа. Оплата согласовывается с менеджером. Не отправляйте данные банковских карт в сообщениях.</p></main><div class="bar"><div><strong id="total">0 ₸</strong><div class="muted" id="count">В корзине 0 товаров</div></div><button class="primary" onclick="showCart()">Корзина 🛒</button></div><dialog id="cartDialog"><h2>Ваш заказ</h2><div id="cartLines"></div><strong id="cartTotal"></strong><input class="field" id="customer" placeholder="Ваше имя" maxlength="80"><input class="field" id="phone" placeholder="Телефон для связи" maxlength="40"><input class="field" id="city" placeholder="Город доставки" maxlength="100"><div class="actions"><button class="secondary" onclick="document.getElementById('cartDialog').close()">Назад</button><button class="primary" onclick="order()">Оформить</button></div><p class="muted">Откроется Telegram с текстом заказа. Отправьте сообщение магазину, чтобы подтвердить наличие и доставку.</p></dialog><script>
-const products=[
-{id:1,n:'Магнитный трек 48V · 2 м',d:'Скрытый монтаж, чёрный',p:17999,c:'Треки',e:'〰️'},
-{id:2,n:'Магнитный трек 48V · 3 м',d:'Скрытый монтаж, чёрный',p:20250,c:'Треки',e:'〰️'},
-{id:3,n:'Линейный светильник · 60 см',d:'48V, 24 Вт',p:null,c:'Светильники',e:'💡'},
-{id:4,n:'Линейный светильник · 30 см',d:'48V, 12 Вт',p:null,c:'Светильники',e:'💡'},
-{id:5,n:'Блок питания · 200 Вт',d:'48V',p:null,c:'Блоки питания',e:'🔌'},
-{id:6,n:'Блок питания · 300 Вт',d:'48V',p:null,c:'Блоки питания',e:'🔌'},
-{id:7,n:'Премиальные розетки',d:'Выбор брендов и цветовых решений',p:null,c:'Розетки и выключатели',e:'◻️'},
-{id:8,n:'Премиальные выключатели',d:'Разные серии и цвета',p:null,c:'Розетки и выключатели',e:'◻️'},
-{id:9,n:'Готовые комплекты 48V',d:'Подбор под ваш проект',p:null,c:'Комплекты',e:'✨'}];
-let filter='Все',basket={};const fmt=v=>v==null?'Цена по запросу':v.toLocaleString('ru-RU')+' ₸';const esc=s=>String(s).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
-function render(){const cats=['Все',...new Set(products.map(x=>x.c))];document.getElementById('filters').innerHTML=cats.map(c=>`<button class="chip ${c===filter?'active':''}" data-filter="${esc(c)}">${esc(c)}</button>`).join('');document.querySelectorAll('[data-filter]').forEach(b=>b.onclick=()=>{filter=b.dataset.filter;render()});document.getElementById('products').innerHTML=products.filter(x=>filter==='Все'||x.c===filter).map(x=>`<article class="item"><div class="visual">${x.e}</div><div class="name">${esc(x.n)}</div><div class="note">${esc(x.d)}</div><div class="price">${fmt(x.p)}</div><button class="add" data-id="${x.id}">+ В корзину</button></article>`).join('');document.querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>{const id=+b.dataset.id;basket[id]=(basket[id]||0)+1;update()});update()}
-function update(){let items=Object.entries(basket).filter(([,q])=>q>0);let sum=items.reduce((s,[id,q])=>s+(products.find(p=>p.id==id).p||0)*q,0);document.getElementById('total').textContent=fmt(sum)+(items.some(([id])=>products.find(p=>p.id==id).p==null)?' + по запросу':'');document.getElementById('count').textContent=`В корзине ${items.reduce((s,[,q])=>s+q,0)} товаров`;document.getElementById('cartLines').innerHTML=items.length?items.map(([id,q])=>{let p=products.find(x=>x.id==id);return `<div class="line"><div>${esc(p.n)}<div class="muted">${fmt(p.p)}</div></div><div class="qty"><button data-change="${id}" data-delta="-1">−</button> ${q} <button data-change="${id}" data-delta="1">+</button></div></div>`}).join(''):'Корзина пуста';document.querySelectorAll('[data-change]').forEach(b=>b.onclick=()=>{let id=+b.dataset.change;basket[id]=Math.max(0,(basket[id]||0)+ +b.dataset.delta);update()});document.getElementById('cartTotal').textContent='Предварительная сумма: '+fmt(sum)}
-function showCart(){update();document.getElementById('cartDialog').showModal()}
-function order(){let entries=Object.entries(basket).filter(([,q])=>q>0);if(!entries.length){alert('Добавьте товар в корзину');return}let name=document.getElementById('customer').value.trim(),phone=document.getElementById('phone').value.trim(),city=document.getElementById('city').value.trim();if(!name||!phone||!city){alert('Заполните имя, телефон и город');return}let msg='Здравствуйте! Хочу оформить заказ IAMLIGHTKZ:\n'+entries.map(([id,q])=>{let p=products.find(x=>x.id==id);return `• ${p.n} — ${q} шт. (${fmt(p.p)})`}).join('\n')+`\n\nИмя: ${name}\nТелефон: ${phone}\nГород: ${city}\nПрошу подтвердить наличие, итоговую стоимость и доставку.`;navigator.clipboard?.writeText(msg).catch(()=>{});let url='https://t.me/iamlightkz_shop_bot?text='+encodeURIComponent(msg);document.getElementById('cartDialog').close();window.open(url,'_blank');alert('Текст заказа подготовлен. Если он не появился в Telegram, скопируйте его вручную и отправьте менеджеру. Важно: бот должен быть настроен на приём сообщений.')}render();</script></body></html>
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>IAMLIGHTKZ — магазин освещения</title>
+  <meta name="theme-color" content="#101010">
+
+  <style>
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:#101010;
+      color:#f6f2e9;
+      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif
+    }
+    header{
+      padding:24px 18px;
+      background:linear-gradient(140deg,#252019,#101010);
+      border-bottom:1px solid #493b24
+    }
+    .brand{
+      font-weight:900;
+      letter-spacing:2px;
+      font-size:27px
+    }
+    .brand span{color:#d7b474}
+    .tag{
+      color:#c8bda8;
+      font-size:13px;
+      margin-top:7px
+    }
+    .wrap{
+      max-width:850px;
+      margin:auto;
+      padding:20px 16px 110px
+    }
+    h1{font-size:28px;margin:8px 0}
+    h2{font-size:20px;margin:28px 0 12px}
+    .intro{color:#c5beb2;line-height:1.5}
+    .chips{
+      display:flex;
+      gap:8px;
+      overflow:auto;
+      padding:10px 0 18px
+    }
+    .chip{
+      white-space:nowrap;
+      background:#242424;
+      color:#eee;
+      border:1px solid #484039;
+      border-radius:22px;
+      padding:11px 14px
+    }
+    .chip.active{
+      background:#cba869;
+      color:#111;
+      border-color:#cba869
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px
+    }
+    .item{
+      background:#1c1c1c;
+      border:1px solid #3b342a;
+      border-radius:15px;
+      padding:13px;
+      display:flex;
+      flex-direction:column;
+      gap:10px
+    }
+    .visual{
+      height:100px;
+      border-radius:10px;
+      background:radial-gradient(circle at 50% 20%,#53432a,#222 65%);
+      display:grid;
+      place-items:center;
+      font-size:38px
+    }
+    .name{
+      font-weight:700;
+      line-height:1.35;
+      min-height:38px
+    }
+    .note{
+      font-size:12px;
+      color:#b9afa0;
+      min-height:30px
+    }
+    .price{
+      color:#e8c58b;
+      font-weight:800
+    }
+    .add,.primary{
+      background:#d4ae70;
+      border:0;
+      border-radius:10px;
+      padding:12px;
+      font-weight:800;
+      color:#15110b
+    }
+    .add{margin-top:auto}
+    .bar{
+      position:fixed;
+      bottom:0;
+      left:0;
+      right:0;
+      padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+      background:#191919;
+      border-top:1px solid #55442e;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px
+    }
+    .bar button{min-width:155px}
+    .muted{
+      color:#b8aa96;
+      font-size:13px
+    }
+    dialog{
+      background:#1a1a1a;
+      color:#f6f2e9;
+      border:1px solid #79603b;
+      border-radius:18px;
+      width:min(94vw,500px);
+      max-height:85vh;
+      padding:20px
+    }
+    dialog::backdrop{background:#000b}
+    .line{
+      display:flex;
+      justify-content:space-between;
+      gap:8px;
+      padding:10px 0;
+      border-bottom:1px solid #333
+    }
+    .qty button{
+      background:#363029;
+      border:0;
+      color:white;
+      padding:5px 10px;
+      border-radius:7px
+    }
+    .field{
+      display:block;
+      width:100%;
+      padding:12px;
+      margin:10px 0;
+      background:#292929;
+      color:white;
+      border:1px solid #5d503d;
+      border-radius:9px;
+      font:inherit
+    }
+    .actions{
+      display:flex;
+      gap:10px;
+      margin-top:15px
+    }
+    .actions button{
+      flex:1;
+      padding:12px;
+      border-radius:9px
+    }
+    .secondary{
+      background:#333;
+      color:white;
+      border:0
+    }
+    .footer{
+      margin:30px 0;
+      color:#b5a995;
+      font-size:13px;
+      line-height:1.6
+    }
+    @media(min-width:650px){
+      .grid{grid-template-columns:repeat(3,1fr)}
+      .visual{height:150px}
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="brand">IAM<span>LIGHTKZ</span></div>
+  <div class="tag">
+    Магнитные треки 48V · светильники · премиальная электрика
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>Освещение с характером</h1>
+
+  <p class="intro">
+    Магнитные системы, светильники, блоки питания, розетки и выключатели.
+    Более 40 брендов и 100 цветовых решений в ассортименте.
+  </p>
+
+  <div id="filters" class="chips"></div>
+
+  <h2>Каталог</h2>
+  <div class="grid" id="products"></div>
+
+  <p class="footer">
+    📍 Астана, Expostroy, бутик 326<br>
+    📦 Доставка по Казахстану и России<br>
+    Цены в каталоге ориентировочные — подтверждаются при оформлении заказа.
+    Оплата согласовывается с менеджером.
+  </p>
+</main>
+
+<div class="bar">
+  <div>
+    <strong id="total">0 ₸</strong>
+    <div class="muted" id="count">В корзине 0 товаров</div>
+  </div>
+
+  <button class="primary" onclick="showCart()">
+    Корзина 🛒
+  </button>
+</div>
+
+<dialog id="cartDialog">
+  <h2>Ваш заказ</h2>
+
+  <div id="cartLines"></div>
+
+  <strong id="cartTotal"></strong>
+
+  <input
+    class="field"
+    id="customer"
+    placeholder="Ваше имя"
+    maxlength="80"
+  >
+
+  <input
+    class="field"
+    id="phone"
+    placeholder="Телефон для связи"
+    maxlength="40"
+  >
+
+  <input
+    class="field"
+    id="city"
+    placeholder="Город доставки"
+    maxlength="100"
+  >
+
+  <div class="actions">
+    <button
+      class="secondary"
+      onclick="document.getElementById('cartDialog').close()"
+    >
+      Назад
+    </button>
+
+    <button
+      class="primary"
+      id="orderButton"
+      onclick="order()"
+    >
+      Оформить
+    </button>
+  </div>
+
+  <p class="muted">
+    После отправки заявки мы свяжемся с вами для подтверждения наличия,
+    итоговой стоимости и доставки.
+  </p>
+</dialog>
+
+<script>
+
+const WORKER_URL =
+  'https://iamlightkz-orders.islam0100tj.workers.dev/order';
+
+const products = [
+  {
+    id:1,
+    n:'Магнитный трек 48V · 2 м',
+    d:'Скрытый монтаж, чёрный',
+    p:17999,
+    c:'Треки',
+    e:'〰️'
+  },
+  {
+    id:2,
+    n:'Магнитный трек 48V · 3 м',
+    d:'Скрытый монтаж, чёрный',
+    p:20250,
+    c:'Треки',
+    e:'〰️'
+  },
+  {
+    id:3,
+    n:'Линейный светильник · 60 см',
+    d:'48V, 24 Вт',
+    p:null,
+    c:'Светильники',
+    e:'💡'
+  },
+  {
+    id:4,
+    n:'Линейный светильник · 30 см',
+    d:'48V, 12 Вт',
+    p:null,
+    c:'Светильники',
+    e:'💡'
+  },
+  {
+    id:5,
+    n:'Блок питания · 200 Вт',
+    d:'48V',
+    p:null,
+    c:'Блоки питания',
+    e:'🔌'
+  },
+  {
+    id:6,
+    n:'Блок питания · 300 Вт',
+    d:'48V',
+    p:null,
+    c:'Блоки питания',
+    e:'🔌'
+  },
+  {
+    id:7,
+    n:'Премиальные розетки',
+    d:'Более 40 брендов и 100 цветовых решений',
+    p:null,
+    c:'Розетки и выключатели',
+    e:'◻️'
+  },
+  {
+    id:8,
+    n:'Премиальные выключатели',
+    d:'Разные серии, материалы и цвета',
+    p:null,
+    c:'Розетки и выключатели',
+    e:'◻️'
+  },
+  {
+    id:9,
+    n:'Готовые комплекты 48V',
+    d:'Подбор под ваш проект',
+    p:null,
+    c:'Комплекты',
+    e:'✨'
+  }
+];
+
+let filter = 'Все';
+let basket = {};
+
+const fmt = value =>
+  value == null
+    ? 'Цена по запросу'
+    : value.toLocaleString('ru-RU') + ' ₸';
+
+const esc = value =>
+  String(value).replace(
+    /[&<>"']/g,
+    ch => ({
+      '&':'&amp;',
+      '<':'&lt;',
+      '>':'&gt;',
+      '"':'&quot;',
+      "'":'&#39;'
+    }[ch])
+  );
+
+function render() {
+  const categories = [
+    'Все',
+    ...new Set(products.map(product => product.c))
+  ];
+
+  document.getElementById('filters').innerHTML =
+    categories.map(category => `
+      <button
+        class="chip ${category === filter ? 'active' : ''}"
+        data-filter="${esc(category)}"
+      >
+        ${esc(category)}
+      </button>
+    `).join('');
+
+  document
+    .querySelectorAll('[data-filter]')
+    .forEach(button => {
+      button.onclick = () => {
+        filter = button.dataset.filter;
+        render();
+      };
+    });
+
+  document.getElementById('products').innerHTML =
+    products
+      .filter(product =>
+        filter === 'Все' || product.c === filter
+      )
+      .map(product => `
+        <article class="item">
+          <div class="visual">${product.e}</div>
+          <div class="name">${esc(product.n)}</div>
+          <div class="note">${esc(product.d)}</div>
+          <div class="price">${fmt(product.p)}</div>
+
+          <button
+            class="add"
+            data-id="${product.id}"
+          >
+            + В корзину
+          </button>
+        </article>
+      `)
+      .join('');
+
+  document
+    .querySelectorAll('[data-id]')
+    .forEach(button => {
+      button.onclick = () => {
+        const id = Number(button.dataset.id);
+
+        basket[id] =
+          (basket[id] || 0) + 1;
+
+        update();
+      };
+    });
+
+  update();
+}
+
+function update() {
+  const items =
+    Object.entries(basket)
+      .filter(([, quantity]) => quantity > 0);
+
+  const sum =
+    items.reduce((total, [id, quantity]) => {
+      const product =
+        products.find(product => product.id == id);
+
+      return total +
+        (product.p || 0) * quantity;
+    }, 0);
+
+  const hasRequestPrice =
+    items.some(([id]) =>
+      products.find(product => product.id == id).p == null
+    );
+
+  document.getElementById('total').textContent =
+    fmt(sum) +
+    (hasRequestPrice ? ' + по запросу' : '');
+
+  const count =
+    items.reduce(
+      (total, [, quantity]) =>
+        total + quantity,
+      0
+    );
+
+  document.getElementById('count').textContent =
+    `В корзине ${count} товаров`;
+
+  document.getElementById('cartLines').innerHTML =
+    items.length
+      ? items.map(([id, quantity]) => {
+          const product =
+            products.find(product => product.id == id);
+
+          return `
+            <div class="line">
+              <div>
+                ${esc(product.n)}
+                <div class="muted">
+                  ${fmt(product.p)}
+                </div>
+              </div>
+
+              <div class="qty">
+                <button
+                  data-change="${id}"
+                  data-delta="-1"
+                >
+                  −
+                </button>
+
+                ${quantity}
+
+                <button
+                  data-change="${id}"
+                  data-delta="1"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+          `;
+        }).join('')
+      : 'Корзина пуста';
+
+  document
+    .querySelectorAll('[data-change]')
+    .forEach(button => {
+      button.onclick = () => {
+        const id =
+          Number(button.dataset.change);
+
+        basket[id] =
+          Math.max(
+            0,
+            (basket[id] || 0) +
+            Number(button.dataset.delta)
+          );
+
+        update();
+      };
+    });
+
+  document.getElementById('cartTotal').textContent =
+    'Предварительная сумма: ' +
+    fmt(sum) +
+    (hasRequestPrice ? ' + позиции по запросу' : '');
+}
+
+function showCart() {
+  update();
+  document
+    .getElementById('cartDialog')
+    .showModal();
+}
+
+async function order() {
+  const entries =
+    Object.entries(basket)
+      .filter(([, quantity]) => quantity > 0);
+
+  if (!entries.length) {
+    alert('Добавьте товар в корзину');
+    return;
+  }
+
+  const name =
+    document
+      .getElementById('customer')
+      .value
+      .trim();
+
+  const phone =
+    document
+      .getElementById('phone')
+      .value
+      .trim();
+
+  const city =
+    document
+      .getElementById('city')
+      .value
+      .trim();
+
+  if (!name || !phone || !city) {
+    alert('Заполните имя, телефон и город');
+    return;
+  }
+
+  const items =
+    entries.map(([id, quantity]) => {
+      const product =
+        products.find(product => product.id == id);
+
+      return `${product.n} — ${quantity} шт. (${fmt(product.p)})`;
+    }).join('\n');
+
+  const sum =
+    entries.reduce((total, [id, quantity]) => {
+      const product =
+        products.find(product => product.id == id);
+
+      return total +
+        (product.p || 0) * quantity;
+    }, 0);
+
+  const hasRequestPrice =
+    entries.some(([id]) =>
+      products.find(product => product.id == id).p == null
+    );
+
+  const total =
+    fmt(sum) +
+    (hasRequestPrice
+      ? ' + позиции по запросу'
+      : '');
+
+  const button =
+    document.getElementById('orderButton');
+
+  const oldText = button.textContent;
+
+  button.disabled = true;
+  button.textContent = 'Отправляем...';
+
+  try {
+    const response =
+      await fetch(
+        WORKER_URL,
+        {
+          method:'POST',
+
+          headers:{
+            'Content-Type':'application/json'
+          },
+
+          body:JSON.stringify({
+            name,
+            phone,
+            city,
+            items,
+            total
+          })
+        }
+      );
+
+    const result =
+      await response.json();
+
+    if (!response.ok || !result.ok) {
+      throw new Error(
+        result.error ||
+        'Ошибка отправки заказа'
+      );
+    }
+
+    document
+      .getElementById('cartDialog')
+      .close();
+
+    alert(
+      '✅ Заказ отправлен! Мы свяжемся с вами для подтверждения.'
+    );
+
+    basket = {};
+
+    document.getElementById('customer').value = '';
+    document.getElementById('phone').value = '';
+    document.getElementById('city').value = '';
+
+    update();
+
+  } catch (error) {
+    alert(
+      'Не удалось отправить заказ. Попробуйте ещё раз.'
+    );
+
+    console.error(error);
+
+  } finally {
+    button.disabled = false;
+    button.textContent = oldText;
+  }
+}
+
+render();
+
+</script>
+
+</body>
+</html>
